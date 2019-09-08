@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'com.gradle.build-scan' version '2.4.1'
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.7.RELEASE'
+    id "org.inferred.processors" version "3.1.0"
+}
+
+group 'com.latincoder'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "io.vavr:vavr:0.9.2"
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+
+    processor 'org.immutables:value:2.7.4'
+    compileOnly 'org.immutables:value:2.7.4'
+
+    implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
+    implementation 'org.springframework.boot:spring-boot-dependencies:2.1.8.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.1.8.RELEASE'
+
+    // https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy-gradle-plugin
+    //compile group: 'net.bytebuddy', name: 'byte-buddy-gradle-plugin', version: '1.10.1'
+
+
+    components {
+        withModule('org.springframework:spring-beans') {
+            allVariants {
+                withDependencyConstraints {
+                    // Need to patch constraints because snakeyaml is an optional dependency
+                    it.findAll { it.name == 'snakeyaml' }.each { it.version { strictly '1.19' } }
+                }
+            }
+        }
+    }
+}
