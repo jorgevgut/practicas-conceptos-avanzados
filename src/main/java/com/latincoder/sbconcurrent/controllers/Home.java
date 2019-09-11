@@ -7,19 +7,15 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/")
 public class Home {
 
-    private ExecutorService executor;
+    private final ExecutorService executor;
 
     @Autowired
     public Home(ExecutorService executor) {
@@ -48,7 +44,7 @@ public class Home {
     }
 
 
-    public boolean isValidNumber(String posibleNumero) {
+    private boolean isValidNumber(String posibleNumero) {
         return Try.of(() -> Integer.valueOf(posibleNumero)).isSuccess();
     }
 

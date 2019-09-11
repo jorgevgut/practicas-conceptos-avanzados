@@ -5,7 +5,6 @@ import com.latincoder.sbconcurrent.model.ImmutableStudent;
 import com.latincoder.sbconcurrent.model.ImmutableStudentResponse;
 import com.latincoder.sbconcurrent.model.Student;
 import com.latincoder.sbconcurrent.model.StudentResponse;
-import com.latincoder.sbconcurrent.model.exceptions.StudentUnderAgeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
